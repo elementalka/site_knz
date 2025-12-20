@@ -19,15 +19,23 @@ export default function HomePage() {
   const nextLives = [...liveAnnouncements].sort((a, b) => +new Date(a.startsAt) - +new Date(b.startsAt)).slice(0, 3);
 
   const percent = main ? Math.round((main.raisedAmount / main.goalAmount) * 100) : 0;
+  const heroStats = [
+    { label: "Партнерських ініціатив", value: "50+" },
+    { label: "Прозорі звіти по зборах", value: "100%" },
+    { label: "Готовність допомоги", value: "24/7" }
+  ];
 
   return (
     <>
-      <section className="py-14 sm:py-20">
+      <section className="relative py-14 sm:py-20 overflow-hidden">
+        <div className="hero-orb orb-1" />
+        <div className="hero-orb orb-2" />
+        <div className="hero-orb orb-3" />
         <Container>
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
             <div>
               <Badge>Офіційний сайт</Badge>
-              <h1 className="mt-4 text-3xl sm:text-5xl font-semibold tracking-tight">
+              <h1 className="mt-4 text-3xl sm:text-5xl font-semibold tracking-tight text-gradient">
                 {site.hero.title}
               </h1>
               <p className="mt-4 text-sm sm:text-base text-muted max-w-xl">
@@ -44,6 +52,15 @@ export default function HomePage() {
 
               <div className="mt-6">
                 <SocialLinks links={socialLinks} />
+              </div>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                {heroStats.map(stat => (
+                  <Card key={stat.label} className="p-4 text-center">
+                    <div className="text-xl font-semibold text-gradient">{stat.value}</div>
+                    <div className="mt-1 text-xs text-muted">{stat.label}</div>
+                  </Card>
+                ))}
               </div>
             </div>
 
