@@ -9,7 +9,13 @@ export default function Badge(props: React.PropsWithChildren<{ tone?: "accent" |
         : "bg-accent/15 text-accent border-accent/25";
 
   return (
-    <span className={cn("inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium", tone, props.className)}>
+    <span
+      className={cn(
+        "inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em]",
+        tone,
+        props.className
+      )}
+    >
       {props.children}
     </span>
   );

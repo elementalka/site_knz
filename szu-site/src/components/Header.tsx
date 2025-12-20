@@ -19,10 +19,14 @@ const links = [
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-bg/60 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-bg/75 backdrop-blur-xl shadow-[0_18px_40px_rgba(0,0,0,0.35)]">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
       <Container className="flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <div className="h-9 w-9 rounded-xl bg-accent/20 border border-accent/25" />
+          <div className="relative h-9 w-9 overflow-hidden rounded-xl border border-accent/30 bg-accent/20">
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/80 via-accent2/70 to-warn/60" />
+            <div className="absolute inset-1 rounded-lg bg-bg/70" />
+          </div>
           <div className="leading-tight">
             <div className="text-sm font-semibold">{site.name}</div>
             <div className="text-xs text-muted">Офіційний сайт спільноти</div>
@@ -34,7 +38,7 @@ export default function Header() {
             <Link
               key={l.href}
               href={l.href}
-              className="rounded-xl px-3 py-2 text-xs font-semibold text-muted hover:text-text hover:bg-white/5 transition"
+              className="rounded-full px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted hover:text-text hover:bg-white/10 transition"
             >
               {l.label}
             </Link>
@@ -54,7 +58,7 @@ export default function Header() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="whitespace-nowrap rounded-xl border border-border bg-soft px-3 py-2 text-xs font-semibold text-muted hover:text-text hover:bg-white/10 transition"
+                className="whitespace-nowrap rounded-full border border-border bg-soft px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-muted hover:text-text hover:bg-white/10 transition"
               >
                 {l.label}
               </Link>

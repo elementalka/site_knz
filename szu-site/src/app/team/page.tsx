@@ -12,8 +12,8 @@ export default function TeamPage() {
         {team.map(m => (
           <Card key={m.id} className="p-6">
             <div className="flex gap-4">
-              <div className="h-20 w-20 overflow-hidden rounded-xl border border-border bg-white/5">
-                {m.photoUrl ? <img src={m.photoUrl} alt={m.name} className="h-full w-full object-cover" /> : null}
+              <div className="media-frame h-20 w-20">
+                {m.photoUrl ? <img src={m.photoUrl} alt={m.name} className="media-image" /> : null}
               </div>
 
               <div className="flex-1">
