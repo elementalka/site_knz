@@ -1,30 +1,45 @@
 import { cn } from "@/lib/cn";
 
-type CardProps = React.PropsWithChildren<
+type CardBaseProps = React.PropsWithChildren<{
+  className?: string;
+}>;
+
+type CardAnchorProps = CardBaseProps &
+  React.ComponentPropsWithoutRef<"a"> & {
+    href: string;
+  };
+
+type CardDivProps = CardBaseProps &
   React.ComponentPropsWithoutRef<"div"> & {
-    href?: string;
-    target?: React.HTMLAttributeAnchorTarget;
-    rel?: string;
-  }
->;
+    href?: undefined;
+  };
+
+type CardProps = CardAnchorProps | CardDivProps;
 
 export default function Card({ className, children, href, target, rel, ...rest }: CardProps) {
-  const Component = href ? "a" : "div";
-  const linkProps = href
-    ? { href, target, rel: rel ?? (target === "_blank" ? "noreferrer" : undefined) }
-    : {};
+  const sharedClassName = cn(
+    "card-wow group rounded-[1.6rem] backdrop-blur-sm",
+    href && "block cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40",
+    className
+  );
+
+  if (href) {
+    return (
+      <a
+        className={sharedClassName}
+        href={href}
+        target={target}
+        rel={rel ?? (target === "_blank" ? "noreferrer" : undefined)}
+        {...(rest as React.ComponentPropsWithoutRef<"a">)}
+      >
+        {children}
+      </a>
+    );
+  }
 
   return (
-    <Component
-      className={cn(
-        "card-wow group rounded-[1.6rem] backdrop-blur-sm",
-        href && "block cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40",
-        className
-      )}
-      {...linkProps}
-      {...rest}
-    >
+    <div className={sharedClassName} {...(rest as React.ComponentPropsWithoutRef<"div">)}>
       {children}
-    </Component>
+    </div>
   );
 }
