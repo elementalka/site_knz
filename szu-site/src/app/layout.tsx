@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="uk">
       <body>
         <Header />
-        <main className="min-h-[70vh]">{children}</main>
+        <main className="relative z-10 min-h-[70vh]">{children}</main>
         <Footer />
       </body>
     </html>

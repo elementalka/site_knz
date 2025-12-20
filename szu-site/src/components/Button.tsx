@@ -24,7 +24,7 @@ type Props = LinkButtonProps | NativeButtonProps;
 
 export default function Button(props: Props) {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-accent/40";
+    "inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold tracking-wide transition active:scale-[0.99] hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-accent/40";
 
   const variantClass =
     props.variant === "secondary"
