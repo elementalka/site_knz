@@ -16,7 +16,8 @@ type CardDivProps = CardBaseProps &
 
 type CardProps = CardAnchorProps | CardDivProps;
 
-export default function Card({ className, children, href, target, rel, ...rest }: CardProps) {
+export default function Card(props: CardProps) {
+  const { className, children, href } = props;
   const sharedClassName = cn(
     "card-wow group rounded-[1.6rem] backdrop-blur-sm",
     href && "block cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40",
@@ -24,6 +25,7 @@ export default function Card({ className, children, href, target, rel, ...rest }
   );
 
   if (href) {
+    const { target, rel, ...rest } = props as CardAnchorProps;
     return (
       <a
         className={sharedClassName}
@@ -37,6 +39,7 @@ export default function Card({ className, children, href, target, rel, ...rest }
     );
   }
 
+  const { ...rest } = props as CardDivProps;
   return (
     <div className={sharedClassName} {...(rest as React.ComponentPropsWithoutRef<"div">)}>
       {children}
