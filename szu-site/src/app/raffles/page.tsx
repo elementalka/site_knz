@@ -13,6 +13,11 @@ export default function RafflesPage() {
       <div className="grid gap-4 lg:grid-cols-2">
         {raffles.map(r => (
           <Card key={r.id} className="p-4">
+            {r.imageUrl && (
+              <div className="media-frame mb-4 aspect-[16/9]">
+                <img src={r.imageUrl} alt={r.title} className="media-image" loading="lazy" />
+              </div>
+            )}
             <div className="mb-3">
               <div className="text-sm font-semibold">{r.title}</div>
               <div className="text-xs text-muted">{formatUA(r.date)}</div>

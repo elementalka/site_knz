@@ -15,6 +15,11 @@ export default function TemplatesPage() {
       <div className="grid gap-4 lg:grid-cols-2">
         {guidanceDocs.map(g => (
           <Card key={g.id} className="p-6">
+            {g.imageUrl && (
+              <div className="media-frame mb-4 aspect-[16/9]">
+                <img src={g.imageUrl} alt={g.title} className="media-image" loading="lazy" />
+              </div>
+            )}
             <div className="flex items-start justify-between gap-3">
               <div className="text-base font-semibold">{g.title}</div>
               <Badge tone="blue">{g.category}</Badge>

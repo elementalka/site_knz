@@ -14,6 +14,11 @@ export default function NewsPage() {
       <div className="grid gap-4 lg:grid-cols-2">
         {items.map(n => (
           <Card key={n.id} className="p-6">
+            {n.imageUrl && (
+              <div className="media-frame mb-4 aspect-[16/9]">
+                <img src={n.imageUrl} alt={n.title} className="media-image" loading="lazy" />
+              </div>
+            )}
             <div className="flex items-center justify-between gap-3">
               <div className="text-xs text-muted">{formatUA(n.date)}</div>
               <div className="flex flex-wrap gap-2">

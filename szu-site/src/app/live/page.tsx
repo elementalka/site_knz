@@ -14,6 +14,11 @@ export default function LivePage() {
       <div className="grid gap-3">
         {items.map(l => (
           <Card key={l.id} className="p-5">
+            {l.imageUrl && (
+              <div className="media-frame mb-4 aspect-[16/9]">
+                <img src={l.imageUrl} alt={l.title} className="media-image" loading="lazy" />
+              </div>
+            )}
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <div className="text-sm font-semibold">{l.title}</div>

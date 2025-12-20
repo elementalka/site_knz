@@ -28,6 +28,7 @@ export type Fundraiser = {
   raisedAmount: number;
   type: "main" | "side";
   description: string;
+  imageUrl?: string;
   jarUrl?: string;
   updatedAt: string;
 };
@@ -37,6 +38,7 @@ export type NewsItem = {
   title: string;
   date: string;
   excerpt: string;
+  imageUrl?: string;
   link?: string;
   tags?: string[];
 };
@@ -48,6 +50,7 @@ export type LiveAnnouncement = {
   platform: "youtube" | "facebook" | "instagram" | "tiktok";
   url: string;
   note?: string;
+  imageUrl?: string;
 };
 
 export type AwardItem = {
@@ -82,6 +85,7 @@ export type ClosedFundraiser = {
   closedAt: string;
   totalRaised?: number;
   reportUrl?: string;
+  imageUrl?: string;
 };
 
 export type RaffleReport = {
@@ -90,6 +94,7 @@ export type RaffleReport = {
   date: string;
   videoUrl: string;
   winners?: { name: string; prize: string }[];
+  imageUrl?: string;
 };
 
 export type SupportPerson = {
@@ -97,6 +102,7 @@ export type SupportPerson = {
   name: string;
   service: "Юрист" | "Супровід ветеранів" | "Психолог" | "Інше";
   licenseOrEdpou?: string;
+  photoUrl?: string;
   contacts: SocialLink[];
   info: string[];
 };
@@ -108,4 +114,5 @@ export type GuidanceDoc = {
   description: string;
   steps: string[];
   files?: { title: string; url: string }[];
+  imageUrl?: string;
 };
