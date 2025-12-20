@@ -9,6 +9,7 @@ export const fundraisers: Fundraiser[] = [
     type: "main",
     description:
       "Закриваємо потребу підрозділу: дрони + комплектуючі/ремнабір. Всі надходження і витрати — у звіті після закриття.",
+    imageUrl: "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1400&q=80",
     jarUrl: "https://send.monobank.ua/jar/xxxxxxxxx",
     updatedAt: "2025-12-20T12:00:00.000Z"
   },
@@ -19,6 +20,7 @@ export const fundraisers: Fundraiser[] = [
     raisedAmount: 41000,
     type: "side",
     description: "Зв’язок = життя. Потрібні Starlink/роутери/кабелі/живлення.",
+    imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
     jarUrl: "https://send.monobank.ua/jar/yyyyyyyyy",
     updatedAt: "2025-12-20T12:00:00.000Z"
   },
@@ -29,6 +31,7 @@ export const fundraisers: Fundraiser[] = [
     raisedAmount: 27500,
     type: "side",
     description: "Ремонт підвісок/гуми/розхідників для евакуаційних та робочих авто.",
+    imageUrl: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80",
     jarUrl: "https://send.monobank.ua/jar/zzzzzzzzz",
     updatedAt: "2025-12-20T12:00:00.000Z"
   }

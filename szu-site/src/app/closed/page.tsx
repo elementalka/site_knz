@@ -12,7 +12,8 @@ export default function ClosedPage() {
         items={closedFundraisers.map(c => ({
           title: c.title,
           date: c.closedAt,
-          meta: c.totalRaised ? `Сума: ${c.totalRaised} грн` : undefined
+          meta: c.totalRaised ? `Сума: ${c.totalRaised} грн` : undefined,
+          imageUrl: c.imageUrl
         }))}
       />
     </Section>

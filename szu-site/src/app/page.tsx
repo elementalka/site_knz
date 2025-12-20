@@ -67,6 +67,11 @@ export default function HomePage() {
             {main && (
               <Card className="p-6">
                 <div className="flex flex-col gap-2">
+                  {main.imageUrl && (
+                    <div className="media-frame mb-4 aspect-[16/9]">
+                      <img src={main.imageUrl} alt={main.title} className="media-image" loading="lazy" />
+                    </div>
+                  )}
                   <div className="flex items-center justify-between gap-3">
                     <div className="text-sm font-semibold">Актуальний збір</div>
                     <Badge tone="blue">{main.type === "main" ? "Основний" : "Суміжний"}</Badge>
@@ -109,6 +114,11 @@ export default function HomePage() {
             const p = Math.round((f.raisedAmount / f.goalAmount) * 100);
             return (
               <Card key={f.id} className="p-5">
+                {f.imageUrl && (
+                  <div className="media-frame mb-4 aspect-[16/9]">
+                    <img src={f.imageUrl} alt={f.title} className="media-image" loading="lazy" />
+                  </div>
+                )}
                 <div className="flex items-start justify-between gap-3">
                   <div className="text-sm font-semibold">{f.title}</div>
                   <Badge tone="accent">Суміжний</Badge>
@@ -141,10 +151,17 @@ export default function HomePage() {
         <div className="grid gap-3">
           {nextLives.map(l => (
             <Card key={l.id} className="p-4">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <div className="text-sm font-semibold">{l.title}</div>
-                  {l.note && <div className="mt-1 text-xs text-muted">{l.note}</div>}
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                  {l.imageUrl && (
+                    <div className="media-frame h-16 w-full sm:h-14 sm:w-24">
+                      <img src={l.imageUrl} alt={l.title} className="media-image" loading="lazy" />
+                    </div>
+                  )}
+                  <div>
+                    <div className="text-sm font-semibold">{l.title}</div>
+                    {l.note && <div className="mt-1 text-xs text-muted">{l.note}</div>}
+                  </div>
                 </div>
                 <div className="text-xs text-muted">{formatUA(l.startsAt)} • {l.platform.toUpperCase()}</div>
               </div>
@@ -162,6 +179,11 @@ export default function HomePage() {
         <div className="grid gap-4 lg:grid-cols-3">
           {topNews.map(n => (
             <Card key={n.id} className="p-5">
+              {n.imageUrl && (
+                <div className="media-frame mb-4 aspect-[16/9]">
+                  <img src={n.imageUrl} alt={n.title} className="media-image" loading="lazy" />
+                </div>
+              )}
               <div className="text-xs text-muted">{formatUA(n.date)}</div>
               <div className="mt-2 text-sm font-semibold">{n.title}</div>
               <div className="mt-2 text-sm text-muted">{n.excerpt}</div>

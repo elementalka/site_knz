@@ -20,6 +20,11 @@ export default function FundraisersPage() {
           const p = Math.round((f.raisedAmount / f.goalAmount) * 100);
           return (
             <Card key={f.id} className="p-6">
+              {f.imageUrl && (
+                <div className="media-frame mb-4 aspect-[16/9]">
+                  <img src={f.imageUrl} alt={f.title} className="media-image" loading="lazy" />
+                </div>
+              )}
               <div className="flex items-start justify-between gap-3">
                 <div className="text-base font-semibold leading-snug">{f.title}</div>
                 <Badge tone={f.type === "main" ? "accent" : "blue"}>{f.type === "main" ? "Основний" : "Суміжний"}</Badge>
