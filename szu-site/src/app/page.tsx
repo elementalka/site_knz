@@ -7,6 +7,7 @@ import Progress from "@/components/Progress";
 import SocialLinks from "@/components/SocialLinks";
 import EmptyState from "@/components/EmptyState";
 import VideoEmbed from "@/components/VideoEmbed";
+import SharedSections from "@/components/SharedSections";
 import { site } from "@/content/site";
 import { socialLinks } from "@/content/social";
 import { fundraisers } from "@/content/fundraisers";
@@ -232,7 +233,13 @@ export default function HomePage() {
       >
         <div className="grid gap-3">
           {nextLives.map(l => (
-            <Card key={l.id} className="p-4">
+            <Card
+              key={l.id}
+              href={l.url}
+              target="_blank"
+              rel="noreferrer"
+              className="p-4"
+            >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   {l.imageUrl && (
@@ -248,9 +255,7 @@ export default function HomePage() {
                 <div className="text-xs text-muted">{formatUA(l.startsAt)} • {l.platform.toUpperCase()}</div>
               </div>
               <div className="mt-3">
-                <a href={l.url} target="_blank" rel="noreferrer" className="text-sm font-semibold text-accent hover:opacity-90 transition">
-                  Перейти до ефіру →
-                </a>
+                <span className="text-sm font-semibold text-accent">Перейти до ефіру →</span>
               </div>
             </Card>
           ))}
@@ -264,7 +269,13 @@ export default function HomePage() {
       >
         <div className="grid gap-4 lg:grid-cols-3">
           {topNews.map(n => (
-            <Card key={n.id} className="p-5">
+            <Card
+              key={n.id}
+              href={n.link}
+              target={n.link ? "_blank" : undefined}
+              rel={n.link ? "noreferrer" : undefined}
+              className="p-5"
+            >
               {n.imageUrl && (
                 <div className="media-frame mb-4 aspect-[16/9]">
                   <img src={n.imageUrl} alt={n.title} className="media-image" loading="lazy" />
@@ -346,21 +357,21 @@ export default function HomePage() {
         )}
       </Section>
 
+      <SharedSections />
+
       <Section
         title="Прозорість та медіа"
         subtitle="Короткий доступ до архівів, відзнак та звітів по допомозі."
       >
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {transparencyCards.map(card => (
-            <Card key={card.href} className="p-5">
+            <Card key={card.href} href={card.href} className="p-5">
               <div className="flex items-center justify-between gap-3">
                 <div className="text-sm font-semibold">{card.title}</div>
                 <Badge tone="blue">{card.meta}</Badge>
               </div>
               <div className="mt-2 text-sm text-muted">{card.description}</div>
-              <a href={card.href} className="mt-4 inline-flex text-sm font-semibold text-accent hover:opacity-90 transition">
-                Перейти →
-              </a>
+              <span className="mt-4 inline-flex text-sm font-semibold text-accent">Перейти →</span>
             </Card>
           ))}
         </div>
@@ -372,15 +383,13 @@ export default function HomePage() {
       >
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {supportCards.map(card => (
-            <Card key={card.href} className="p-5">
+            <Card key={card.href} href={card.href} className="p-5">
               <div className="flex items-center justify-between gap-3">
                 <div className="text-sm font-semibold">{card.title}</div>
                 <Badge tone="accent">{card.meta}</Badge>
               </div>
               <div className="mt-2 text-sm text-muted">{card.description}</div>
-              <a href={card.href} className="mt-4 inline-flex text-sm font-semibold text-accent hover:opacity-90 transition">
-                Перейти →
-              </a>
+              <span className="mt-4 inline-flex text-sm font-semibold text-accent">Перейти →</span>
             </Card>
           ))}
         </div>

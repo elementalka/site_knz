@@ -13,7 +13,13 @@ export default function AwardsPage() {
     <Section title="Наші відзнаки" subtitle="Фото/відео/подяки та документи.">
       <div className="grid gap-4 lg:grid-cols-3">
         {items.map(a => (
-          <Card key={a.id} className="overflow-hidden">
+          <Card
+            key={a.id}
+            href={a.url}
+            target="_blank"
+            rel="noreferrer"
+            className="overflow-hidden"
+          >
             {a.kind === "photo" ? (
               <div className="aspect-[4/3] bg-white/5">
                 <img src={a.url} alt={a.title} className="h-full w-full object-cover" />
@@ -30,9 +36,7 @@ export default function AwardsPage() {
               </div>
               {a.date && <div className="mt-2 text-xs text-muted">{formatUA(a.date)}</div>}
               {a.description && <div className="mt-2 text-sm text-muted">{a.description}</div>}
-              <a href={a.url} target="_blank" rel="noreferrer" className="mt-3 inline-flex text-sm font-semibold text-accent hover:opacity-90 transition">
-                Відкрити →
-              </a>
+              <span className="mt-3 inline-flex text-sm font-semibold text-accent">Відкрити →</span>
             </div>
           </Card>
         ))}

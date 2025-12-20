@@ -34,7 +34,13 @@ export default function LivePage() {
     <Section title="Прямі ефіри" subtitle="Оповіщення про ефіри в усіх соцмережах (ретрансляція).">
       <div className="grid gap-3">
         {items.map(l => (
-          <Card key={l.id} className="p-5">
+          <Card
+            key={l.id}
+            href={l.url}
+            target="_blank"
+            rel="noreferrer"
+            className="p-5"
+          >
             {l.imageUrl && (
               <div className="media-frame mb-4 aspect-[16/9]">
                 <img src={l.imageUrl} alt={l.title} className="media-image" loading="lazy" />
@@ -52,9 +58,7 @@ export default function LivePage() {
               </div>
             </div>
             <div className="mt-3">
-              <a className="text-sm font-semibold text-accent hover:opacity-90 transition" href={l.url} target="_blank" rel="noreferrer">
-                Перейти до ефіру →
-              </a>
+              <span className="text-sm font-semibold text-accent">Перейти до ефіру →</span>
             </div>
           </Card>
         ))}

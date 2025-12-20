@@ -27,7 +27,13 @@ export default function NewsPage() {
     <Section title="Новини" subtitle="Оновлення про допомогу, передачі, звіти та збори.">
       <div className="grid gap-4 lg:grid-cols-2">
         {items.map(n => (
-          <Card key={n.id} className="p-6">
+          <Card
+            key={n.id}
+            href={n.link}
+            target={n.link ? "_blank" : undefined}
+            rel={n.link ? "noreferrer" : undefined}
+            className="p-6"
+          >
             {n.imageUrl && (
               <div className="media-frame mb-4 aspect-[16/9]">
                 <img src={n.imageUrl} alt={n.title} className="media-image" loading="lazy" />
@@ -41,11 +47,7 @@ export default function NewsPage() {
             </div>
             <div className="mt-2 text-base font-semibold">{n.title}</div>
             <div className="mt-2 text-sm text-muted">{n.excerpt}</div>
-            {n.link ? (
-              <a className="mt-4 inline-flex text-sm font-semibold text-accent hover:opacity-90 transition" href={n.link} target="_blank" rel="noreferrer">
-                Детальніше →
-              </a>
-            ) : null}
+            {n.link ? <span className="mt-4 inline-flex text-sm font-semibold text-accent">Детальніше →</span> : null}
           </Card>
         ))}
       </div>

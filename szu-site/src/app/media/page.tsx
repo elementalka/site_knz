@@ -18,13 +18,20 @@ export default function MediaPage() {
         {photos.length ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {photos.map(p => (
-              <Card key={p.id} className="overflow-hidden">
+              <Card
+                key={p.id}
+                href={p.url}
+                target="_blank"
+                rel="noreferrer"
+                className="overflow-hidden"
+              >
                 <div className="aspect-[4/3] bg-white/5">
                   <img src={p.url} alt={p.title} className="h-full w-full object-cover" loading="lazy" />
                 </div>
                 <div className="p-4">
                   <div className="text-sm font-semibold">{p.title}</div>
                   {p.description && <div className="mt-2 text-sm text-muted">{p.description}</div>}
+                  <span className="mt-3 inline-flex text-sm font-semibold text-accent">Відкрити →</span>
                 </div>
               </Card>
             ))}
@@ -44,7 +51,13 @@ export default function MediaPage() {
         {docs.length ? (
           <div className="grid gap-3">
             {docs.map(d => (
-              <Card key={d.id} className="p-5">
+              <Card
+                key={d.id}
+                href={d.url}
+                target="_blank"
+                rel="noreferrer"
+                className="p-5"
+              >
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <div className="text-sm font-semibold">{d.title}</div>
@@ -52,9 +65,7 @@ export default function MediaPage() {
                   </div>
                   <Badge tone="warn">DOC</Badge>
                 </div>
-                <a className="mt-3 inline-flex text-sm font-semibold text-accent hover:opacity-90 transition" href={d.url} target="_blank" rel="noreferrer">
-                  Відкрити документ →
-                </a>
+                <span className="mt-3 inline-flex text-sm font-semibold text-accent">Відкрити документ →</span>
               </Card>
             ))}
           </div>
