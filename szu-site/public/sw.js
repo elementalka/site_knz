@@ -1,6 +1,7 @@
-const CACHE_NAME = "szu-cache-v1";
+const CACHE_NAME = "szu-cache-v2";
 const OFFLINE_URL = "/offline.html";
-const CORE_ASSETS = ["/", "/fundraisers", "/live", "/news", "/support", "/media", "/awards", "/closed", "/raffles", "/partners", "/team", OFFLINE_URL];
+const CORE_ASSETS = [OFFLINE_URL];
+const STATIC_ASSET_REGEX = /\.(?:css|js|mjs|map|png|jpg|jpeg|gif|webp|avif|svg|ico|woff2?|ttf|otf)$/i;
 
 self.addEventListener("install", event => {
   event.waitUntil(
@@ -18,18 +19,47 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
+  const url = new URL(event.request.url);
+  if (url.origin !== self.location.origin) return;
   const isNavigate = event.request.mode === "navigate";
+  const isNextAsset = url.pathname.startsWith("/_next/");
+  const isStaticAsset = isNextAsset || STATIC_ASSET_REGEX.test(url.pathname);
 
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      if (response) return response;
-      return fetch(event.request)
+  if (isNavigate) {
+    event.respondWith(
+      fetch(event.request)
         .then(fetchResponse => {
           const responseClone = fetchResponse.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseClone));
           return fetchResponse;
         })
-        .catch(() => (isNavigate ? caches.match(OFFLINE_URL) : undefined));
-    })
+        .catch(() => caches.match(event.request).then(response => response ?? caches.match(OFFLINE_URL)))
+    );
+    return;
+  }
+
+  if (isStaticAsset) {
+    event.respondWith(
+      caches.match(event.request).then(response => {
+        if (response) return response;
+        return fetch(event.request)
+          .then(fetchResponse => {
+            const responseClone = fetchResponse.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseClone));
+            return fetchResponse;
+          });
+      })
+    );
+    return;
+  }
+
+  event.respondWith(
+    fetch(event.request)
+      .then(fetchResponse => {
+        const responseClone = fetchResponse.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseClone));
+        return fetchResponse;
+      })
+      .catch(() => caches.match(event.request))
   );
 });
