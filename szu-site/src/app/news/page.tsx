@@ -1,9 +1,23 @@
+import type { Metadata } from "next";
 import Section from "@/components/Section";
 import Card from "@/components/Card";
 import Badge from "@/components/Badge";
 import EmptyState from "@/components/EmptyState";
 import { news } from "@/content/news";
+import { site } from "@/content/site";
 import { formatUA } from "@/lib/format";
+
+const preview = news.find(n => n.imageUrl)?.imageUrl;
+
+export const metadata: Metadata = {
+  title: `Новини — ${site.name}`,
+  description: "Оновлення по волонтерських ініціативах, звіти та нові збори.",
+  openGraph: {
+    title: `Новини — ${site.name}`,
+    description: "Оновлення по волонтерських ініціативах, звіти та нові збори.",
+    images: preview ? [{ url: preview }] : undefined
+  }
+};
 
 export default function NewsPage() {
   const items = [...news].sort((a, b) => +new Date(b.date) - +new Date(a.date));

@@ -1,9 +1,11 @@
 import { cn } from "@/lib/cn";
 
-export default function Card(props: React.PropsWithChildren<{ className?: string }>) {
+type CardProps = React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>;
+
+export default function Card({ className, children, ...rest }: CardProps) {
   return (
-    <div className={cn("card-wow group rounded-[1.6rem] backdrop-blur-sm", props.className)}>
-      {props.children}
+    <div className={cn("card-wow group rounded-[1.6rem] backdrop-blur-sm", className)} {...rest}>
+      {children}
     </div>
   );
 }

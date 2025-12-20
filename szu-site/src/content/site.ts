@@ -8,6 +8,10 @@ export const site = {
     ctaPrimary: { label: "Підтримати збір", href: "/fundraisers" },
     ctaSecondary: { label: "Дивитись ефіри", href: "/live" }
   },
+  donate: {
+    label: "Підтримати збір",
+    href: "/fundraisers"
+  },
   about: {
     title: "Про команду",
     text:

@@ -1,10 +1,24 @@
+import type { Metadata } from "next";
 import Section from "@/components/Section";
 import Card from "@/components/Card";
 import Badge from "@/components/Badge";
 import Progress from "@/components/Progress";
 import EmptyState from "@/components/EmptyState";
 import { fundraisers } from "@/content/fundraisers";
+import { site } from "@/content/site";
 import { formatMoneyUAH, formatUA } from "@/lib/format";
+
+const preview = fundraisers.find(f => f.imageUrl)?.imageUrl;
+
+export const metadata: Metadata = {
+  title: `Збори — ${site.name}`,
+  description: "Актуальні волонтерські збори, прогрес і банківські реквізити.",
+  openGraph: {
+    title: `Збори — ${site.name}`,
+    description: "Актуальні волонтерські збори, прогрес і банківські реквізити.",
+    images: preview ? [{ url: preview }] : undefined
+  }
+};
 
 export default function FundraisersPage() {
   if (!fundraisers.length) return <Section title="Збори"><EmptyState title="Немає активних зборів" /></Section>;

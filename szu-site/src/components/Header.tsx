@@ -2,6 +2,7 @@ import Link from "next/link";
 import Container from "./Container";
 import { site } from "@/content/site";
 import Button from "./Button";
+import LiveStatusBadge from "./LiveStatusBadge";
 
 const links = [
   { href: "/fundraisers", label: "Збори" },
@@ -47,7 +48,10 @@ export default function Header() {
 
         <div className="flex items-center gap-2">
           <Button as="link" href="/fundraisers" variant="primary">Підтримати</Button>
-          <Button as="link" href="/live" variant="secondary" className="hidden sm:inline-flex">Ефіри</Button>
+          <div className="hidden sm:flex items-center gap-2">
+            <LiveStatusBadge />
+            <Button as="link" href="/live" variant="secondary">Ефіри</Button>
+          </div>
         </div>
       </Container>
 

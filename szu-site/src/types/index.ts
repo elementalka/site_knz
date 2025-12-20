@@ -47,6 +47,7 @@ export type LiveAnnouncement = {
   id: string;
   title: string;
   startsAt: string;
+  endsAt?: string;
   platform: "youtube" | "facebook" | "instagram" | "tiktok";
   url: string;
   note?: string;
@@ -115,4 +116,28 @@ export type GuidanceDoc = {
   steps: string[];
   files?: { title: string; url: string }[];
   imageUrl?: string;
+};
+
+export type TransparencyStep = {
+  id: string;
+  title: string;
+  date: string;
+  meta?: string;
+  imageUrl?: string;
+};
+
+export type StoryCard = {
+  id: string;
+  title: string;
+  person: string;
+  excerpt: string;
+  imageUrl?: string;
+};
+
+export type GalleryItem = {
+  id: string;
+  title: string;
+  type: "photo" | "video";
+  url: string;
+  previewUrl?: string;
 };
