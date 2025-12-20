@@ -28,13 +28,6 @@ export default function HomePage() {
   const topNews = [...news].sort((a, b) => +new Date(b.date) - +new Date(a.date)).slice(0, 3);
   const nextLives = [...liveAnnouncements].sort((a, b) => +new Date(a.startsAt) - +new Date(b.startsAt)).slice(0, 3);
   const teamPreview = team.slice(0, 3);
-  const awardsPreview = [...awards].sort((a, b) => +new Date(b.date ?? 0) - +new Date(a.date ?? 0)).slice(0, 3);
-  const mediaPreview = mediaAssets.slice(0, 3);
-  const partnersPreview = partners.slice(0, 4);
-  const closedPreview = [...closedFundraisers].sort((a, b) => +new Date(b.closedAt) - +new Date(a.closedAt)).slice(0, 2);
-  const rafflePreview = [...raffles].sort((a, b) => +new Date(b.date) - +new Date(a.date)).slice(0, 2);
-  const guidancePreview = guidanceDocs.slice(0, 2);
-  const supportPreview = supportPeople.slice(0, 2);
   const videoAppeals = team
     .filter(member => member.videoAppeal)
     .map(member => ({
@@ -52,6 +45,58 @@ export default function HomePage() {
     { label: "Партнерських ініціатив", value: "50+" },
     { label: "Прозорі звіти по зборах", value: "100%" },
     { label: "Готовність допомоги", value: "24/7" }
+  ];
+  const transparencyCards = [
+    {
+      title: "Відзнаки та подяки",
+      description: "Фото та офіційні листи від підрозділів і партнерів.",
+      meta: `${awards.length} матеріалів`,
+      href: "/awards"
+    },
+    {
+      title: "Медіатека",
+      description: "Фото, відео передач та супровідні документи.",
+      meta: `${mediaAssets.length} файлів`,
+      href: "/media"
+    },
+    {
+      title: "Закриті збори",
+      description: "Архів завершених ініціатив із датами закриття.",
+      meta: `${closedFundraisers.length} зборів`,
+      href: "/closed"
+    },
+    {
+      title: "Розіграші",
+      description: "Підсумки лотів, відеозвіти та переможці.",
+      meta: `${raffles.length} подій`,
+      href: "/raffles"
+    }
+  ];
+  const supportCards = [
+    {
+      title: "Підтримка юристів",
+      description: "Допомога, супровід і перевірені контакти.",
+      meta: `${supportPeople.length} контактів`,
+      href: "/support"
+    },
+    {
+      title: "Шаблони документів",
+      description: "Готові інструкції та зразки звернень.",
+      meta: `${guidanceDocs.length} шаблонів`,
+      href: "/templates"
+    },
+    {
+      title: "Партнерська мережа",
+      description: "Організації та бізнеси, що нас підтримують.",
+      meta: `${partners.length} партнерів`,
+      href: "/partners"
+    },
+    {
+      title: "Усі активні збори",
+      description: "Деталі по основних та суміжних ініціативах.",
+      meta: `${fundraisers.length} активних`,
+      href: "/fundraisers"
+    }
   ];
 
   return (
@@ -137,7 +182,11 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <Section title="Суміжні збори" subtitle="Два паралельні збори до 100 000 грн.">
+      <Section
+        title="Суміжні збори"
+        subtitle="Два паралельні збори до 100 000 грн."
+        action={<Button as="link" href="/fundraisers" variant="ghost">Усі збори →</Button>}
+      >
         <div className="grid gap-4 lg:grid-cols-2">
           {side.map(f => {
             const p = Math.round((f.raisedAmount / f.goalAmount) * 100);
@@ -176,7 +225,11 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section title="Анонси прямих ефірів" subtitle="Оповіщення про заплановані ефіри з переходом у соцмережі.">
+      <Section
+        title="Анонси прямих ефірів"
+        subtitle="Оповіщення про заплановані ефіри з переходом у соцмережі."
+        action={<Button as="link" href="/live" variant="ghost">Усі ефіри →</Button>}
+      >
         <div className="grid gap-3">
           {nextLives.map(l => (
             <Card key={l.id} className="p-4">
@@ -204,7 +257,11 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section title="Новини" subtitle="Оновлення щодо допомоги, передач, зборів і звітів.">
+      <Section
+        title="Новини"
+        subtitle="Оновлення щодо допомоги, передач, зборів і звітів."
+        action={<Button as="link" href="/news" variant="ghost">Усі новини →</Button>}
+      >
         <div className="grid gap-4 lg:grid-cols-3">
           {topNews.map(n => (
             <Card key={n.id} className="p-5">
@@ -226,7 +283,11 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section title="Наша команда" subtitle="7 учасників команди, соцмережі, напрямки допомоги та подяки.">
+      <Section
+        title="Наша команда"
+        subtitle="7 учасників команди, соцмережі, напрямки допомоги та подяки."
+        action={<Button as="link" href="/team" variant="ghost">Вся команда →</Button>}
+      >
         {teamPreview.length ? (
           <>
             <div className="grid gap-4 lg:grid-cols-3">
@@ -261,8 +322,7 @@ export default function HomePage() {
               ))}
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Button as="link" href="/team" variant="secondary">Вся команда</Button>
-              <Button as="link" href="/support" variant="ghost">Допомога юристів →</Button>
+              <Button as="link" href="/support" variant="secondary">Допомога юристів</Button>
             </div>
           </>
         ) : (
@@ -270,7 +330,11 @@ export default function HomePage() {
         )}
       </Section>
 
-      <Section title="Відеозвернення" subtitle="Звернення команди, звіти та відео з передач.">
+      <Section
+        title="Відеозвернення"
+        subtitle="Звернення команди, звіти та відео з передач."
+        action={<Button as="link" href="/team" variant="ghost">Усі звернення →</Button>}
+      >
         {videoAppeals.length ? (
           <div className="grid gap-4 lg:grid-cols-2">
             {videoAppeals.map(video => (
@@ -280,275 +344,46 @@ export default function HomePage() {
         ) : (
           <EmptyState title="Поки що немає відеозвернень" />
         )}
-        <div className="mt-6">
-          <Button as="link" href="/team" variant="secondary">Усі звернення</Button>
+      </Section>
+
+      <Section
+        title="Прозорість та медіа"
+        subtitle="Короткий доступ до архівів, відзнак та звітів по допомозі."
+      >
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {transparencyCards.map(card => (
+            <Card key={card.href} className="p-5">
+              <div className="flex items-center justify-between gap-3">
+                <div className="text-sm font-semibold">{card.title}</div>
+                <Badge tone="blue">{card.meta}</Badge>
+              </div>
+              <div className="mt-2 text-sm text-muted">{card.description}</div>
+              <a href={card.href} className="mt-4 inline-flex text-sm font-semibold text-accent hover:opacity-90 transition">
+                Перейти →
+              </a>
+            </Card>
+          ))}
         </div>
       </Section>
 
-      <Section title="Наші відзнаки" subtitle="Фото, відео та подяки від підрозділів і партнерів.">
-        {awardsPreview.length ? (
-          <>
-            <div className="grid gap-4 lg:grid-cols-3">
-              {awardsPreview.map(award => (
-                <Card key={award.id} className="overflow-hidden">
-                  {award.kind === "photo" ? (
-                    <div className="aspect-[4/3] bg-white/5">
-                      <img src={award.url} alt={award.title} className="h-full w-full object-cover" loading="lazy" />
-                    </div>
-                  ) : (
-                    <div className="aspect-[4/3] bg-white/5 flex items-center justify-center">
-                      <div className="text-xs text-muted">{award.kind.toUpperCase()}</div>
-                    </div>
-                  )}
-                  <div className="p-4">
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="text-sm font-semibold">{award.title}</div>
-                      <Badge tone="blue">{award.kind}</Badge>
-                    </div>
-                    {award.description && <div className="mt-2 text-sm text-muted">{award.description}</div>}
-                    <a
-                      href={award.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mt-3 inline-flex text-sm font-semibold text-accent hover:opacity-90 transition"
-                    >
-                      Відкрити →
-                    </a>
-                  </div>
-                </Card>
-              ))}
-            </div>
-            <div className="mt-6">
-              <Button as="link" href="/awards" variant="secondary">Усі відзнаки</Button>
-            </div>
-          </>
-        ) : (
-          <EmptyState title="Поки що немає відзнак" />
-        )}
-      </Section>
-
-      <Section title="Фото, відео та документи" subtitle="Архів матеріалів і доказової бази по кожній допомозі.">
-        {mediaPreview.length ? (
-          <>
-            <div className="grid gap-4 lg:grid-cols-3">
-              {mediaPreview.map(asset => (
-                <Card key={asset.id} className="p-5">
-                  {asset.category === "photo" ? (
-                    <div className="media-frame mb-4 aspect-[4/3]">
-                      <img src={asset.url} alt={asset.title} className="media-image" loading="lazy" />
-                    </div>
-                  ) : (
-                    <div className="media-frame mb-4 flex aspect-[4/3] items-center justify-center">
-                      <div className="text-xs text-muted">{asset.category.toUpperCase()}</div>
-                    </div>
-                  )}
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="text-sm font-semibold">{asset.title}</div>
-                    <Badge tone="accent">{asset.category}</Badge>
-                  </div>
-                  {asset.description && <div className="mt-2 text-sm text-muted">{asset.description}</div>}
-                  <a
-                    href={asset.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-3 inline-flex text-sm font-semibold text-accent hover:opacity-90 transition"
-                  >
-                    Відкрити →
-                  </a>
-                </Card>
-              ))}
-            </div>
-            <div className="mt-6">
-              <Button as="link" href="/media" variant="secondary">Уся медіатека</Button>
-            </div>
-          </>
-        ) : (
-          <EmptyState title="Поки що немає матеріалів" />
-        )}
-      </Section>
-
-      <Section title="Партнери" subtitle="Організації та бізнеси, з якими ми співпрацюємо.">
-        {partnersPreview.length ? (
-          <>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {partnersPreview.map(partner => (
-                <Card key={partner.id} className="p-4 text-center">
-                  {partner.logoUrl ? (
-                    <div className="media-frame mb-3 aspect-[3/2]">
-                      <img src={partner.logoUrl} alt={partner.name} className="media-image" loading="lazy" />
-                    </div>
-                  ) : null}
-                  <div className="text-sm font-semibold">{partner.name}</div>
-                  {partner.note && <div className="mt-1 text-xs text-muted">{partner.note}</div>}
-                  {partner.url && (
-                    <a className="mt-2 inline-flex text-xs text-accent hover:opacity-90 transition" href={partner.url} target="_blank" rel="noreferrer">
-                      Відкрити сайт →
-                    </a>
-                  )}
-                </Card>
-              ))}
-            </div>
-            <div className="mt-6">
-              <Button as="link" href="/partners" variant="secondary">Усі партнери</Button>
-            </div>
-          </>
-        ) : (
-          <EmptyState title="Партнери додаються" />
-        )}
-      </Section>
-
-      <Section title="Закриті збори" subtitle="Список закритих зборів та час закриття.">
-        {closedPreview.length ? (
-          <>
-            <div className="grid gap-4 lg:grid-cols-2">
-              {closedPreview.map(item => (
-                <Card key={item.id} className="p-5">
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                    {item.imageUrl ? (
-                      <div className="media-frame h-20 w-full sm:h-16 sm:w-28">
-                        <img src={item.imageUrl} alt={item.title} className="media-image" loading="lazy" />
-                      </div>
-                    ) : null}
-                    <div className="flex-1">
-                      <div className="text-sm font-semibold">{item.title}</div>
-                      <div className="mt-1 text-xs text-muted">Закрито: {formatUA(item.closedAt)}</div>
-                      <div className="mt-1 text-xs text-muted">Зібрано: {formatMoneyUAH(item.totalRaised)}</div>
-                    </div>
-                  </div>
-                  {item.reportUrl && (
-                    <a href={item.reportUrl} target="_blank" rel="noreferrer" className="mt-3 inline-flex text-xs text-accent hover:opacity-90 transition">
-                      Звіт →
-                    </a>
-                  )}
-                </Card>
-              ))}
-            </div>
-            <div className="mt-6">
-              <Button as="link" href="/closed" variant="secondary">Всі закриті збори</Button>
-            </div>
-          </>
-        ) : (
-          <EmptyState title="Немає закритих зборів" />
-        )}
-      </Section>
-
-      <Section title="Розіграші лотів і звіти" subtitle="Відеозвіти з ефірів, результати розіграшів та отримання лотів.">
-        {rafflePreview.length ? (
-          <>
-            <div className="grid gap-4 lg:grid-cols-2">
-              {rafflePreview.map(raffle => (
-                <Card key={raffle.id} className="p-5">
-                  {raffle.imageUrl ? (
-                    <div className="media-frame mb-4 aspect-[16/9]">
-                      <img src={raffle.imageUrl} alt={raffle.title} className="media-image" loading="lazy" />
-                    </div>
-                  ) : null}
-                  <div className="text-sm font-semibold">{raffle.title}</div>
-                  <div className="mt-1 text-xs text-muted">{formatUA(raffle.date)}</div>
-                  {raffle.winners?.length ? (
-                    <ul className="mt-3 text-xs text-muted list-disc pl-4">
-                      {raffle.winners.slice(0, 2).map(winner => (
-                        <li key={`${winner.name}-${winner.prize}`}>{winner.name} — {winner.prize}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                  {raffle.videoUrl && (
-                    <a href={raffle.videoUrl} target="_blank" rel="noreferrer" className="mt-3 inline-flex text-xs text-accent hover:opacity-90 transition">
-                      Дивитися відео →
-                    </a>
-                  )}
-                </Card>
-              ))}
-            </div>
-            <div className="mt-6">
-              <Button as="link" href="/raffles" variant="secondary">Усі розіграші</Button>
-            </div>
-          </>
-        ) : (
-          <EmptyState title="Немає розіграшів" />
-        )}
-      </Section>
-
-      <Section title="Допомога юристів і супровід ветеранів" subtitle="Контакти, ліцензії/ЄДРПОУ та перелік послуг.">
-        {supportPreview.length ? (
-          <>
-            <div className="grid gap-4 lg:grid-cols-2">
-              {supportPreview.map(person => (
-                <Card key={person.id} className="p-5">
-                  <div className="flex items-start gap-3">
-                    {person.photoUrl ? (
-                      <div className="media-frame h-16 w-16 shrink-0">
-                        <img src={person.photoUrl} alt={person.name} className="media-image" loading="lazy" />
-                      </div>
-                    ) : null}
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between gap-2">
-                        <div>
-                          <div className="text-sm font-semibold">{person.name}</div>
-                          {person.licenseOrEdpou && <div className="mt-1 text-xs text-muted">{person.licenseOrEdpou}</div>}
-                        </div>
-                        <Badge tone="accent">{person.service}</Badge>
-                      </div>
-                      <div className="mt-3">
-                        <SocialLinks links={person.contacts} />
-                      </div>
-                      <ul className="mt-3 text-xs text-muted list-disc pl-4">
-                        {person.info.slice(0, 2).map(item => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-            <div className="mt-6">
-              <Button as="link" href="/support" variant="secondary">Усі контакти підтримки</Button>
-            </div>
-          </>
-        ) : (
-          <EmptyState title="Блок підтримки наповнюється" />
-        )}
-      </Section>
-
-      <Section title="Документи для звернення" subtitle="Шаблони, інструкції та поради для ВЛК/ВВК та інших звернень.">
-        {guidancePreview.length ? (
-          <>
-            <div className="grid gap-4 lg:grid-cols-2">
-              {guidancePreview.map(doc => (
-                <Card key={doc.id} className="p-5">
-                  {doc.imageUrl ? (
-                    <div className="media-frame mb-4 aspect-[16/9]">
-                      <img src={doc.imageUrl} alt={doc.title} className="media-image" loading="lazy" />
-                    </div>
-                  ) : null}
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="text-sm font-semibold">{doc.title}</div>
-                    <Badge tone="blue">{doc.category}</Badge>
-                  </div>
-                  {doc.description && <div className="mt-2 text-sm text-muted">{doc.description}</div>}
-                  {doc.steps?.length ? (
-                    <ul className="mt-3 text-xs text-muted list-disc pl-4">
-                      {doc.steps.slice(0, 2).map(step => (
-                        <li key={step}>{step}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                  {doc.files?.[0] && (
-                    <a href={doc.files[0].url} target="_blank" rel="noreferrer" className="mt-3 inline-flex text-xs text-accent hover:opacity-90 transition">
-                      {doc.files[0].title} →
-                    </a>
-                  )}
-                </Card>
-              ))}
-            </div>
-            <div className="mt-6">
-              <Button as="link" href="/templates" variant="secondary">Усі шаблони</Button>
-            </div>
-          </>
-        ) : (
-          <EmptyState title="Немає доступних шаблонів" />
-        )}
+      <Section
+        title="Підтримка та партнерства"
+        subtitle="Служби допомоги, шаблони документів та наша партнерська мережа."
+      >
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {supportCards.map(card => (
+            <Card key={card.href} className="p-5">
+              <div className="flex items-center justify-between gap-3">
+                <div className="text-sm font-semibold">{card.title}</div>
+                <Badge tone="accent">{card.meta}</Badge>
+              </div>
+              <div className="mt-2 text-sm text-muted">{card.description}</div>
+              <a href={card.href} className="mt-4 inline-flex text-sm font-semibold text-accent hover:opacity-90 transition">
+                Перейти →
+              </a>
+            </Card>
+          ))}
+        </div>
       </Section>
 
       <Section title="Наші соцмережі" subtitle="Головні канали в YouTube та Facebook, а також інші соцмережі.">
