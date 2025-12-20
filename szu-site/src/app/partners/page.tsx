@@ -10,7 +10,13 @@ export default function PartnersPage() {
     <Section title="Партнери" subtitle="З ким співпрацюємо.">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {partners.map(p => (
-          <Card key={p.id} className="p-5">
+          <Card
+            key={p.id}
+            href={p.url}
+            target={p.url ? "_blank" : undefined}
+            rel={p.url ? "noreferrer" : undefined}
+            className="p-5"
+          >
             {p.logoUrl && (
               <div className="media-frame mb-4 flex h-20 items-center justify-center bg-white/5">
                 <img src={p.logoUrl} alt={p.name} className="h-12 w-auto object-contain" loading="lazy" />
@@ -18,11 +24,7 @@ export default function PartnersPage() {
             )}
             <div className="text-sm font-semibold">{p.name}</div>
             {p.note && <div className="mt-2 text-sm text-muted">{p.note}</div>}
-            {p.url && (
-              <a href={p.url} target="_blank" rel="noreferrer" className="mt-4 inline-flex text-sm font-semibold text-accent hover:opacity-90 transition">
-                Відкрити →
-              </a>
-            )}
+            {p.url ? <span className="mt-4 inline-flex text-sm font-semibold text-accent">Відкрити →</span> : null}
           </Card>
         ))}
       </div>
