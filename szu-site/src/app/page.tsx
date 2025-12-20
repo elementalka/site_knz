@@ -35,11 +35,11 @@ export default function HomePage() {
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button href={site.hero.ctaPrimary.href}>{site.hero.ctaPrimary.label}</Button>
-                <Button href={site.hero.ctaSecondary.href} variant="secondary">
+                <Button as="link" href={site.hero.ctaPrimary.href}>{site.hero.ctaPrimary.label}</Button>
+                <Button as="link" href={site.hero.ctaSecondary.href} variant="secondary">
                   {site.hero.ctaSecondary.label}
                 </Button>
-                <Button href="/team" variant="ghost">Наша команда →</Button>
+                <Button as="link" href="/team" variant="ghost">Наша команда →</Button>
               </div>
 
               <div className="mt-6">
@@ -77,7 +77,7 @@ export default function HomePage() {
                         Відкрити банку →
                       </a>
                     )}
-                    <Button href="/fundraisers" variant="secondary">Усі збори</Button>
+                    <Button as="link" href="/fundraisers" variant="secondary">Усі збори</Button>
                   </div>
                 </div>
               </Card>
@@ -163,7 +163,7 @@ export default function HomePage() {
           <div className="text-sm font-semibold">{site.about.title}</div>
           <div className="mt-2 text-sm text-muted leading-relaxed">{site.about.text}</div>
           <div className="mt-4">
-            <Button href="/team" variant="secondary">Детальніше про команду</Button>
+            <Button as="link" href="/team" variant="secondary">Детальніше про команду</Button>
           </div>
         </Card>
       </Section>

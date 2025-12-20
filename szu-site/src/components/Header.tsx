@@ -42,8 +42,8 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button href="/fundraisers" variant="primary">Підтримати</Button>
-          <Button href="/live" variant="secondary" className="hidden sm:inline-flex">Ефіри</Button>
+          <Button as="link" href="/fundraisers" variant="primary">Підтримати</Button>
+          <Button as="link" href="/live" variant="secondary" className="hidden sm:inline-flex">Ефіри</Button>
         </div>
       </Container>
 
