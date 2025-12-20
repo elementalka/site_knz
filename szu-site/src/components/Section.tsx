@@ -7,7 +7,7 @@ export default function Section(props: React.PropsWithChildren<{ title?: string;
       <Container>
         {(props.title || props.subtitle) && (
           <div className="mb-6 sm:mb-8">
-            {props.title && <h2 className="text-xl sm:text-2xl font-semibold tracking-tight">{props.title}</h2>}
+            {props.title && <h2 className="section-title text-xl sm:text-2xl font-semibold tracking-tight">{props.title}</h2>}
             {props.subtitle && <p className="mt-2 text-sm sm:text-base text-muted">{props.subtitle}</p>}
           </div>
         )}

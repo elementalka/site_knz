@@ -28,10 +28,10 @@ export default function Button(props: Props) {
 
   const variantClass =
     props.variant === "secondary"
-      ? "bg-soft hover:bg-white/10 border border-border"
+      ? "btn-secondary text-text"
       : props.variant === "ghost"
-        ? "bg-transparent hover:bg-white/6"
-        : "bg-accent text-bg hover:opacity-95";
+        ? "btn-ghost text-text"
+        : "btn-primary text-bg";
 
   const cls = cn(base, variantClass, props.className);
 
