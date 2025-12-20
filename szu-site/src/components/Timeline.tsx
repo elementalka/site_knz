@@ -17,4 +17,3 @@ export default function Timeline(props: { items: { title: string; date: string; 
     </div>
   );
 }
-s
